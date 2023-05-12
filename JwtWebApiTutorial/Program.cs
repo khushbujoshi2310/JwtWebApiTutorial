@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using System;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("aouth2", new OpenApiSecurityScheme{
+    options.AddSecurityDefinition("ouath2", new OpenApiSecurityScheme{
         Description="Standard Authorization header using Bearer scheme(\"bearer {token}\")",
         In=ParameterLocation.Header,
         Name="Authorization",
