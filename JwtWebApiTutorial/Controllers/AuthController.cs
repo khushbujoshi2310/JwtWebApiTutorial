@@ -12,6 +12,7 @@ namespace JwtWebApiTutorial.Controllers
     public class AuthController : ControllerBase
     {
         public static User user=new User();
+
         private readonly IConfiguration _configuration;
         public AuthController(IConfiguration configuration)
         {
@@ -53,8 +54,7 @@ namespace JwtWebApiTutorial.Controllers
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                //_configuration.GetSection("AppSettings:Token").Value));
-                _configuration.GetSection("AppSettings:Token").Value));
+                 _configuration.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -65,8 +65,6 @@ namespace JwtWebApiTutorial.Controllers
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
-
-            //return string.Empty;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -86,5 +84,7 @@ namespace JwtWebApiTutorial.Controllers
                 passwordHash=hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             };
         }
+
+
     }
 }
