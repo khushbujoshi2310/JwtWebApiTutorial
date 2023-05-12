@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("ouath2", new OpenApiSecurityScheme{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme{
         Description="Standard Authorization header using Bearer scheme(\"bearer {token}\")",
         In=ParameterLocation.Header,
         Name="Authorization",
@@ -31,8 +31,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters=new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8
-                    .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
             ValidateIssuer=false,
             ValidateAudience=false
         };
@@ -49,10 +49,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
